@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 const AnecdoteList = () => {
   const anecdotes = useSelector(({ anecdotes, filter }) => {
     const sorted = anecdotes.toSorted((a,b) => b.votes-a.votes)
-    console.log(sorted);
     if(filter){
       return sorted.filter((a) => a.content.toLowerCase().includes(filter.toLowerCase()));
     }
