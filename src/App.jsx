@@ -9,7 +9,8 @@ const App = () => {
     {
       queryKey: ['anecdotes'],
       queryFn: getAnecdotes,
-      retry: 1
+      retry: 1,
+      refetchOnWindowFocus: false
     }
   )
 
