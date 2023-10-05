@@ -11,7 +11,12 @@ const AnecdoteForm = () => {
   const createAnecdoteMutation = useMutation({
     mutationFn:createAnecdote,
     onSuccess: (newAnecdote) => {
+      showNotification(notificationDispatch,`Created anecdote '${newAnecdote.content}'`);
       queryClient.setQueryData(['anecdotes'], (oldData) => oldData.concat(newAnecdote))
+    },
+    onError: (error) => {
+      showNotification(notificationDispatch,`Error: '${error.response.data.error}'`);
+
     }
   });
 
@@ -20,8 +25,6 @@ const AnecdoteForm = () => {
     const content = event.target.anecdote.value
     event.target.anecdote.value = ''
     createAnecdoteMutation.mutate({ content, votes:0 });
-
-    showNotification(notificationDispatch,`Created anecdote '${content}'`);
   }
 
   return (
